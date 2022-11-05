@@ -23,8 +23,8 @@ description: >- # this means to ignore newlines until "baseurl:"
   VCSs have become a necessity in all modern software settings. 
 
 
-baseurl: "/MQ-CS-Edu" # the subpath of your site, e.g. /blog
-url: "https://briggsrr.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: /MQ-CS-Edu # the subpath of your site, e.g. /blog
+url: "https://briggsrr.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: Coming soon...
 github_username:  briggsrr
 
