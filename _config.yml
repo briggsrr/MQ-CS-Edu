@@ -13,17 +13,19 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Version Control Systems 
+title: Version Control Systems
 email: rbriggs@ucsb.edu
 description: >- # this means to ignore newlines until "baseurl:"
   This page was created to help other students understand an often overlooked, yet extremely crucial
   aspect of software design: version controls systems. Why do VCSs matter? In a collaborative setting, 
   it is extemely important to know the whos, whens and whys of a project for effiency and debugging purposes. 
   By allowing teams to look at snapshots of old projects, log changes, and even revert to old verions of code, 
-  VCSs have become a necessity in all modern software settings.
-baseurl: "/MQ-CS-Edu/" # the subpath of your site, e.g. /blog
-url: "https://briggsrr.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: Coming Soon
+  VCSs have become a necessity in all modern software settings. 
+
+
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: Coming soon...
 github_username:  briggsrr
 
 # Build settings
