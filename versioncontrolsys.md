@@ -57,8 +57,9 @@ mkdir foo && \
 touch foo/file2.txt 
 ```
 ***What did I just do?*** <br/>
-You created a file structure inside your prefered directory that looks like: 
-{% blockdiag %}
+You created a file structure inside your prefered directory that looks like:
+<!-- Note that jekyll does not support the diagram plugin, replaced with screenshot -->
+<!-- {% blockdiag %}
 blockdiag {
     orientation = portrait
     A [label = "(root)(tree) git_test"];
@@ -70,7 +71,7 @@ blockdiag {
     A -> C;
    
 }
-{% endblockdiag %}
+{% endblockdiag %} -->
 In Git, a file is also called `blob` and a directory is called a `tree`. 
 
 Now lets initialize git so we can track git_test and all of its contents:
@@ -78,7 +79,8 @@ Now lets initialize git so we can track git_test and all of its contents:
 git init 
 ```
 The `git init` command does not save immediately save a version of  git_test, but instead creates a folder called `.git` inside the root folder that will eventually be full of files and subdirectories that will hold all metadata that Git needs to track the project. Now our file structure looks like: 
-{% blockdiag %}
+<!-- Note that jekyll does not support the diagram plugin, replaced with screenshot -->
+<!-- {% blockdiag %}
 blockdiag {
     orientation = portrait
     A [label = "(root)(tree) git_test"];
@@ -91,7 +93,7 @@ blockdiag {
     A -> C;
     A -> E;
 }
-{% endblockdiag %}
+{% endblockdiag %} -->
 ***Why can't I find a .git file under git_test?*** <br/>
 Hidden files, (they usually files that start with a .), are helpful in preventing accidental deletion of important data. The user should not interact with the metadata git is storing, so it makes sense for it to be hidden. However, you can run `ls -a` to see visible and invisible files and directories. 
 
