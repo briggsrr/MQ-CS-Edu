@@ -4,7 +4,7 @@ title:  "About this site"
 date:   2022-11-05 12:29:14 -0700
 categories: jekyll update
 ---
-This site was created with jekyll and github pages originally for my ULA presentation, and as a place for students to find bonus study materials. 
+This site was created with jekyll and github pages originally for my ULA presentation, and as a place for students to find bonus study materials. The idea of this style of teaching is from Professor Phil Conrad. 
 
 Posts are found in `_posts` directory. To launch this website locally use:
 `bundle install` followed by `bundle exec jekyll serve`
