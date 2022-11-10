@@ -115,7 +115,7 @@ The `-m` flag allows you to tag a message associated with your snapshot, which c
 
 ![gitphoto2](assets/images/dvc1.jpg)
 
-Now type `echo "Hello, Git" >> file1.txt` and create another snapshot by first adding and then commiting, this time with message `yourinitials - Added Hello, Git to file1.txt`. Entering the command `git log` into your terminal should now show you both your snapshots (or commits) chronologically ordered: complete with the current HEAD, author, timestamp, and even commit messages of your snapshots. `git log` is also extremely useful in collaborative settings, since it also shows the snapshots of all contributors. Hit q to quit the git log process. 
+Now enter `echo "Hello, Git" >> file1.txt`into your terminal and create another snapshot by first adding and then commiting, this time with message `yourinitials - Added Hello, Git to file1.txt`. Entering the command `git log` into your terminal should now show you both your snapshots (or commits) chronologically ordered: complete with the current HEAD, author, timestamp, and even commit messages of your snapshots. `git log` is also extremely useful in collaborative settings, since it also shows the snapshots of all contributors. Hit q to quit the git log process. 
  <br/>
 
 ![gitphoto3](assets/images/dvc2.jpg)
@@ -123,7 +123,7 @@ Now type `echo "Hello, Git" >> file1.txt` and create another snapshot by first a
 ***What is this 40 character long string of characters next to my commit when I run git log?*** <br/>
 Good question, we will take a look at that in the Git's Data Model section.
 
-Great. We can now update our code and save it as snapshots as we go along and add features. But what if we make a mistake? We either deleted a file, got caught up in a bug or accidently ran `rm -rf *` in the source directory instead of the build directory. Part of why we were using a VCS is to be able to fix these problems quickly, and sure enough, Git provides a multitude of way to do so. Let's look at one common way to do so now (and we will look at one later when we look at remote repositories). First lets pretend we accidently wiped out our entire git_test project and staged and committed our code. For convience, you can copy the follow commands and enter them from git_test: 
+Great. We can now update our code and save it as snapshots as we go along and add features. But what if we make a mistake? A few example of what a mistake could be is: deleting a file, creating a bug or accidently running `rm -rf *` in the source directory instead of the build directory. Part of why we were using a VCS is to be able to fix these problems quickly, and sure enough, Git provides a multitude of way to do so. Let's look at one common approach to fixing our mistake. First lets pretend we accidently wiped out our entire git_test project, and then staged and committed our code. For convience, you can copy the follow commands and enter them from git_test: 
 ```bash 
 rm -rf * && \
 git add . && \
@@ -138,10 +138,10 @@ For our example, lets use the hard flag. Enter this command this from your git_t
 ```bash
 git reset --hard HEAD~1
 ```
-Let's first break this the `HEAD~1` parameter down. `HEAD`refers to what we want to reset (the most recent snapshot). The `~1` indicates how many commit back we want to go. Putting these together `HEAD~1` means we want the new `HEAD` to be the commit 1 before the original `HEAD`. After running this command, you should see all the expected files from the last commit are back in git_test. Note that running `git log` no longer shows the commit where we deleted everything.
+Let's first break this the `HEAD~1` arguement down. `HEAD`refers to what we want to reset (the most recent snapshot). The `~1` indicates how many commit back we want to go. Putting these together `HEAD~1` means we want the new `HEAD` to be the commit 1 before the original `HEAD`. After running this command, you should see all the expected files from the last commit are back in git_test. Note that running `git log` no longer shows the commit in where we deleted everything.
 
 ***What is the difference between git reset, git restore and git revert?*** <br/>
-
+The use cases somewhat overlap but their are subtle differences. `git reset` is about updating your brach, moving the HEAD while removing commits from the branch. It is also used to restore staged files (this overlaps with git restore). `git restore` is about restoring files from either the staged area or from another commit. `git revert` is about making a new commit that reverts changes made by other commits. Note that git revert and git reset alter git history, whereas restore does not. 
 
 
 <br/><br/>
