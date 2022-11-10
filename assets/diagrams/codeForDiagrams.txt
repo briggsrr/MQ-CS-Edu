@@ -1,0 +1,35 @@
+This is the code used for the jekyll-diagrams that can only be used locally. 
+
+1
+-----------------
+{% blockdiag %}
+blockdiag {
+    orientation = portrait
+    A [label = "(root)(tree) git_test"];
+    B [label = "(tree) foo"];
+    C [label = "(blob) file1.txt"];
+    D [label = "(blob) file2.txt"];
+
+    A -> B -> D;
+    A -> C;
+   
+}
+{% endblockdiag %}
+
+
+2
+-----------------
+{% blockdiag %}
+blockdiag {
+    orientation = portrait
+    A [label = "(root)(tree) git_test"];
+    B [label = "(tree) foo"];
+    C [label = "(blob) file1.txt"];
+    D [label = "(blob) file2.txt"];
+    E [label = " .git"];
+
+    A -> B -> D;
+    A -> C;
+    A -> E;
+}
+{% endblockdiag %}

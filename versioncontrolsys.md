@@ -58,20 +58,9 @@ touch foo/file2.txt
 ```
 ***What did I just do?*** <br/>
 You created a file structure inside your prefered directory that looks like:
-<!-- Note that jekyll does not support the diagram plugin, replaced with screenshot -->
-<!-- {% blockdiag %}
-blockdiag {
-    orientation = portrait
-    A [label = "(root)(tree) git_test"];
-    B [label = "(tree) foo"];
-    C [label = "(blob) file1.txt"];
-    D [label = "(blob) file2.txt"];
 
-    A -> B -> D;
-    A -> C;
-   
-}
-{% endblockdiag %} -->
+![diag1](assets/diagrams/diag1.jpg)
+
 In Git, a file is also called `blob` and a directory is called a `tree`. 
 
 Now lets initialize git so we can track git_test and all of its contents:
@@ -79,21 +68,9 @@ Now lets initialize git so we can track git_test and all of its contents:
 git init 
 ```
 The `git init` command does not save immediately save a version of  git_test, but instead creates a folder called `.git` inside the root folder that will eventually be full of files and subdirectories that will hold all metadata that Git needs to track the project. Now our file structure looks like: 
-<!-- Note that jekyll does not support the diagram plugin, replaced with screenshot -->
-<!-- {% blockdiag %}
-blockdiag {
-    orientation = portrait
-    A [label = "(root)(tree) git_test"];
-    B [label = "(tree) foo"];
-    C [label = "(blob) file1.txt"];
-    D [label = "(blob) file2.txt"];
-    E [label = " .git"];
 
-    A -> B -> D;
-    A -> C;
-    A -> E;
-}
-{% endblockdiag %} -->
+![diag2](assets/diagrams/diag2.jpg)
+
 ***Why can't I find a .git file under git_test?*** <br/>
 Hidden files, (they usually files that start with a .), are helpful in preventing accidental deletion of important data. The user should not interact with the metadata git is storing, so it makes sense for it to be hidden. However, you can run `ls -a` to see visible and invisible files and directories. 
 
@@ -143,7 +120,7 @@ git reset --hard HEAD~1
 Let's first break this the `HEAD~1` arguement down. `HEAD`refers to what we want to reset (the most recent snapshot). The `~1` indicates how many commit back we want to go. Putting these together `HEAD~1` means we want the new `HEAD` to be the commit 1 before the original `HEAD`. After running this command, you should see all the expected files from the last commit are back in git_test. Note that running `git log` no longer shows the commit in where we deleted everything.
 
 ***What is the difference between git reset, git restore and git revert?*** <br/>
-The use cases somewhat overlap but their are subtle differences. `git reset` is about updating your brach, moving the HEAD while removing commits from the branch. It is also used to restore staged files (this overlaps with git restore). `git restore` is about restoring files from either the staged area or from another commit. `git revert` is about making a new commit that reverts changes made by other commits. Note that git revert and git reset alter git history, whereas restore does not. 
+The use cases somewhat overlap but their are subtle differences. `git reset` is about updating your branch by moving the HEAD to a previous commit, and then removing the original commit. It is also used to restore staged files (this overlaps with git restore). `git restore` is about restoring files from either the staged area or from another commit. `git revert` is about making a new commit that reverts changes made by other commits. Note that git revert and git reset alter git history, whereas restore does not. 
 
 
 <br/><br/>
