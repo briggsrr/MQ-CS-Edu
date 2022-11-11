@@ -33,3 +33,39 @@ blockdiag {
     A -> E;
 }
 {% endblockdiag %}
+
+
+4
+-----------------
+{% blockdiag %}
+blockdiag {
+    A [label = "Snapshot #1"];
+    B [label = "Snapshot #2"];
+    C [label = "Snapshot #3"];
+    D [label = "Snapshot #4"];
+    E [label = "Snapshot #5"];
+    F [label = "Snapshot #6"];
+    G [label = "Snapshot #7"];
+
+    A -> B -> C -> D -> G;
+    C -> E -> F -> G;
+
+}
+{% endblockdiag %}
+
+3
+-----------------
+{% blockdiag %}
+blockdiag {
+    A [label = "Snapshot #1"];
+    B [label = "Snapshot #2"];
+    C [label = "Snapshot #3"];
+    D [label = "Snapshot #4"];
+    E [label = "Snapshot #5"];
+    F [label = "Snapshot #6"];
+
+    A -> B -> C -> D;
+    C -> E -> F
+
+}
+{% endblockdiag %}
