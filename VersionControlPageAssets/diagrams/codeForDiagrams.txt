@@ -69,3 +69,83 @@ blockdiag {
 
 }
 {% endblockdiag %}
+
+5
+-----------------
+{% blockdiag %}
+blockdiag {
+    orientation = portrait
+    A [label = "(root)(tree) git_test"];
+    B [label = "(tree) foo"];
+    C [label = "(blob) file1.txt"];
+    D [label = "(blob) file2.txt"];
+    F [label = "(blob) file3.txt"];
+    G [label = "(blob) file4.txt"];
+    E [label = " .git"];
+
+    A -> B -> D;
+    A -> C;
+    A -> F;
+    A -> G;
+    A -> E;
+}
+{% endblockdiag %}
+
+6
+-----------------
+{% blockdiag %}
+blockdiag {
+    orientation = portrait
+    A [label = "(root)(tree) git_test"];
+    B [label = "(tree) foo"];
+    C [label = "(blob) file1.txt"];
+    D [label = "(blob) file2.txt"];
+    G [label = "(blob) file5.txt"];
+    E [label = " .git"];
+
+    A -> B -> D;
+    A -> C;
+    A -> G;
+    A -> E;
+}
+{% endblockdiag %}
+
+7
+-----------------
+{% blockdiag %}
+blockdiag {
+    A [label = "Snapshot #1"];
+    B [label = "Snapshot #2"];
+    E [label = "Snapshot #5"];
+    C [label = "Snapshot #3",color = pink];
+    D [label = "Snapshot #4", color = pink];
+
+    A -> B
+    B -> C, E
+    C -> D
+
+}
+{% endblockdiag %}
+
+
+8
+-----------------
+{% blockdiag %}
+blockdiag {
+    orientation = portrait
+    A [label = "(root)(tree) git_test"];
+    B [label = "(tree) foo"];
+    C [label = "(blob) file1.txt"];
+    D [label = "(blob) file2.txt"];
+    F [label = "(blob) file3.txt"];
+    G [label = "(blob) file4.txt"];
+    H [label = "(blob) file5.txt"];
+    E [label = " .git"];
+
+    A -> B -> D;
+    A -> C;
+    A -> F;
+    A -> G;
+    A -> E;
+    A -> H;
+}

@@ -20,20 +20,22 @@ permalink: /versioncontrolsystems/
  * git log 
  * git reset, git restore, and git revert
 
-4. Branching and Merging
+4. Branching 
 
-5. Git's Data Model 
+5. Merging
+
+6. Git's Data Model 
     * relating snapshots
     * git objects
     * object representation
     * SHA-1 hash
     * references
 
-6. Remote Repositories
+7. Remote Repositories
 
-7. Rebasing Branches
+8. Rebasing Branches
 
-8. Sources and Further Reading 
+9. Sources and Further Reading 
 
 <br/><br/>
 
@@ -146,11 +148,170 @@ Awesome. You can now locally use git to save snapshots of you projects and if yo
 
 <br/><br/>
 
-## 4. Branching and Merging
+## 4. Branching 
+Imagine you are working on a website with a team. You are in the midst of implementing a new "contact us" page when your CEO, Steve Zuckerberg, tells you the login button is broken for all users and you need to fix it immediately. You could reset back to when the login button was implemented, but then what happens to your "contact us" page work? Fortunately, Git's data model is not linear: you can split off from a commit. 
+
+![diag3](VersionControlPageAssets/diagrams/diag3.jpg)
+
+In the above diagram, snapshots 1-4 as being apart of the default branch `master`, given to your branch from the very first commit. Let's say snapshot 5-6 are on branch develop. You can work freely on branch develop without affecting the source code in the master branch. What Git is actually doing when you create a branch is creating a new pointer or `reference` (more on this in Git's data model) to you current snapshot or commit. Note that you can also branch off of any other branch. 
+
+![dvc3](VersionControlPageAssets/images/dvc3.jpg)
+
+![dvc4](VersionControlPageAssets/images/dvc4.jpg)
+
+Now lets get into an example. First navigate to the previous `git_test` repo from chapter 4, and enter in your terminal:
+```bash 
+git branch
+```
+This command prints out all branches present in the repostiory (which for this example should just be the default master) and also which branch we are on, indicated by an asterisk. Now lets create a new branch called develop by entering the following command: 
+```bash 
+git branch develop
+```
+Now run `git branch` and you will see a new reference `develop`. However, you may notice that our current branch is still `master`. To switch to our newly created branch, we need to run:
+```bash 
+git checkout develop
+```
+Try running `git branch` again, and the asterisk should now be next to `develop`. The `git checkout` command provides us a convient way to implicitly create and switch to a branch by using a `-b` flag. Enter the following into your terminal:
+```bash 
+git checkout -b branch3
+```
+Now run `git branch` to verify results. Let's now create a change and see what happens. Now that lets create a new commit on the `develop` branch that adds `file3.txt`.
+```bash 
+git checkout develop && \
+touch file3.txt && \
+git add . && \
+git commit -m "Adding file3.txt to branch develop"
+```
+Now try checking out the `master` branch and note that there is no `file3.txt`. 
+
+***What if I want to rename a branch?*** <br/>
+To a branch your are currently on you can use `git branch -m newName`. If you want to rename another branch from wherever, use `git branch -m oldName newName`.
+
+Now lets go ahead and delete branch3. The straightforward syntax is:
+```bash 
+git branch -d branch3
+```
+Verify branch3 no longer exists with `git branch`.
+
+Now checkout out to develop and create a `file4.txt`;
+```bash 
+git checkout develop && \
+touch file4.txt 
+```
+Let's pretend file4.txt is an incomplete feature and is not ready to be even be commited. Your boss just old you to change a button from red to dark red immediately or else you are fired. You know you can checkout to the master branch and change it, but you do not want to lose all your progress. This situation is when `git stash` is useful. `git stash` temporarily stores the staged and modified file in a cache, making the working branch clean, allowing for proper branch switching. Let's see `git stash` in action, make sure you are on branch develop and enter:
+```bash 
+git add . && \
+git stash && \
+git checkout master 
+```
+Now you would make the needed changes to master. Enter the following:
+```bash 
+touch file5.txt && \
+git add . && \
+git commit -m "Adding file5.txt to branch master"
+```
+To resume progress on `develop` enter: 
+```bash 
+git checkout develop && \
+git stash apply 
+```
+Run `git status` to ensure all files are back.  Let's go ahead and create another commit on the develop branch and master branch before we dive into merging branches.
+```bash
+git commit -m "Adding file4.txt to branch develop" 
+```
 
 <br/><br/>
 
-## 5. Git's data model
+## 5. Merging 
+A quick sanity check.
+
+Our `git_test` directory on branch `develop` has 4 total commits and `HEAD` looks like: 
+
+![diag5](VersionControlPageAssets/diagrams/diag5.jpg)
+
+Our `git_test` directory on branch `master` has 3 total commits and `HEAD` looks like: 
+
+![diag6](VersionControlPageAssets/diagrams/diag6.jpg)
+
+
+Our `git_test` commit history looks like: 
+
+![diag7](VersionControlPageAssets/diagrams/diag7.jpg)
+
+Now we will merge the develop branch into the master branch using `git merge`. Although the commit history is different for our master and develop branch, we can create what is called a `merge commit` that is representative of all changes from develop and master branches. Once a merge commit is created, the history of the snapshots in the merged branch will also become apart of the branch that it is merged with. 
+
+![dvc4](VersionControlPageAssets/images/dvc5.jpg)
+
+To merge `develop` into `master` we first need to checkout master. Do so by entering: 
+```bash 
+git checkout master
+```
+Now that we are on the branch that will contain our merge, we can run: 
+```bash 
+git merge develop
+```
+Verify that both the `master` and `develop` `references` point to the merge commit by using `git log`. Then verify that your git_test directory looks like: 
+
+![diag8](VersionControlPageAssets/diagrams/diag8.jpg)
+
+Since `master` now contains the commit history of `develop`, it is safe to delete `develop`. Do so by entering: 
+```bash 
+git branch -d develop
+```
+Run `git log` to verify the commits made in develop still exist. 
+
+But what if two branches make changes to the same file? Copy and the paste the following command block from your git_test directory to setup an instance where this occurs: 
+```bash 
+git branch develop && \
+echo 'I love Merge Conflicts' >> file2.txt && \
+git add . && \
+git commit -m "Adding I love Merge Conflicts to file2.txt on master branch" && \
+git checkout develop && \
+echo 'I hate Merge Conflicts' >> file2.txt && \
+git add . && \
+git commit -m "Adding I Hate Merge Conflicts to file2.txt on master branch" && \
+git checkout master
+```
+
+
+There is a merge conflict after running these commands since you:
+1. Created a new branch called `develop` (again)
+2. Changed `file2.txt` on master to contain "I love Merge Conflicts" and committed
+3. Switched to branch develop 
+4. Changed `file2.txt` on develop to contain "I hate Merge Conflicts" and committed
+5. Switched back to branch master
+
+The commit created on master after the branch is conflicting with the commit on develop. Try and merge with:
+```bash 
+git merge develop
+```
+And you should see that the merge failed because of file2.txt. Git helps us identify what the conflict is by using a special syntax. To see this syntax, enter:
+```bash 
+open file2.txt
+```
+and you should see: 
+```text 
+<<<<<<< HEAD
+I love Merge Conflicts
+=======
+I hate Merge Conflicts
+>>>>>>> develop
+```
+It should look contain what the conflict is in the  `HEAD`'s file2.txt (where we currently are) and also what in `develop`'s file2.txt, separated by a line of `=======`s. Now edit this file, removing all the unecessary git syntax, only leaving what you want to keep. For us, edit the file to say 
+```text 
+I hate Merge Conflicts
+```
+Now let's stage and commit our changes with:
+```bash 
+git add file2.txt && \
+git commit -m "Fixed merge conflict in file2.txt"
+```
+Type `git log` and you will see this commit has a special line that startes with `merge` that indicates which two commits were merged. 
+
+
+<br/><br/>
+
+## 6. Git's data model
 Now lets dive a little deeper into how that aforementioned .git file is actually relating and storing all these snapshots from potentially multiple branches. A history of a repositoritory is a directed acyclic (no-cycle) graph (or DAG for short) of snapshots, where each snapshot refers to a set of parent snapshots that precede it. When two branches merge is an example of when one snapshot will have 2 parents. Let's quickly look at an example DAG commit history, where the arrows represent the chronology of snapshots. 
 
 ![diag3](VersionControlPageAssets/diagrams/diag3.jpg)
@@ -190,15 +351,15 @@ Most people have trouble memorizing 40 hexadecimal character, so git came up wit
 
 <br/><br/>
 
-## 6. Remote Repositories
+## 7. Remote Repositories
 
 <br/><br/>
 
-## 7. Rebasing Branches
+## 8. Rebasing Branches
 
 <br/><br/>
 
-## 8. Further Reading
+## 9. Further Reading
 
 
 

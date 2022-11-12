@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Introduction"
-date:   2022-11-05 12:29:15 -0800
+date:   2022-11-10 12:29:15 -0800
 ---
 My name is `Bobby Briggs` and my pronouns are `he/him/his`. I am very interested in tutoring for `CS16`, `CS24` for the upcoming winter quarter and `CS156` in the spring. 
 
