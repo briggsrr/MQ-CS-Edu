@@ -389,11 +389,58 @@ Once we have the two repositories linked, let's push our local code and it's rev
 ```bash 
 git push origin master 
 ```
-Note that `origin` can be any remote name and `master` can be whatever branch we are updating. Verify that on your Git-Test remote repository, there now exists our example source code. 
+Note that `origin` can be any remote name and `master` can be whatever branch we are updating. Verify that on your Git-Test remote repository, there now exists our example source code. But what if we start from an already existing remote repo?
+
+If we want to copy and clone an entire codebase of a project from a remote repository and set it up as a local repository on our machine, we can use `git clone`. When using `git clone` to copy a project, two other actions are occuring:
+1. Essentially `git remote add origin <url>` is run as a subcommand of `git clone`, automatically linking the local and remote repositories. 
+2. It copies and sets up the primary branch, which is usually set as the `master` in most directories. 
+
+Now that we have pushed our commit history to a remote repository, let's delete our local copy and clone it back to further understand the cloning process. Navigate to git_test on your local machine and enter the following commands: 
+```bash
+rm -rf * && \
+cd ../ && \
+find . -name . -o -prune -exec rm -rf -- {} +
+```
+The find command is complicated but it ensure hidden files and the `.git` metadata is deleted. And then to clone your remote repository run:
+```bash 
+git clone URL-TO-YOUR-REMOTE-REPO
+```
+Nice. Try out `git log` and notice now there exists a `origin/master` and `origin/HEAD` reference. Keep in mind the `HEAD` is the latest snapchat of the branch you are on.
 
 
+***What if I want to clone a particular branch?*** <br/>
+You can clone a particular branch with `git clone --branch BRANCH_NAME URL-TO-YOUR-REMOTE-REPO`
 
+***What if I don't want to clone a project's entire commit history?*** <br/>
+For super big projects, cloning the entire commit history can take a long time. By using a `depth` flag, we can clone a commit history up to a certain point. The full command looks like: `git clone URL-TO-YOUR-REMOTE-REPO --depth DEPTH-NUMBER`
 
+Now let's talk about getting changes from the remote after cloning it. Imagine you just cloned the master branch and are working on a new feature. A few days go by and you want to know how the remote repository has updated since you cloned it. To download the changes without affecting your local codebase, you can use `git fetch`. This essentially is updating the `origin/master` reference, allowing you to see the lastest commit history. Lets see this in action. First go to your Git-Test remote repository on GitHub and click the green `Add a README` button. Select the `commit direct to master branch` option and then commit the file, so the remote repo master branch is 1 commit ahead of our local copy. Now head to your git_test directory in terminal and enter:
+```bash 
+git fetch origin
+```
+Now let's checkout the `origin/master` branch we just fetched by entering: 
+```bash 
+git checkout origin/master
+```
+And now you should see the `README.md`. Note that this a detached head state since we are checking out the remote branch. 
+
+![dvc6](VersionControlPageAssets/images/dvc6.jpg)
+
+Before we merge the remote branch, we need to go back to our local branch state by entering 
+```bash 
+git checkout master
+```
+To merge our fetched changes, we now can run: 
+```bash 
+git merge origin/master
+```
+And now verify the changes in the remote are merged with the local one. 
+
+There exists a commonly-used command called `git pull` that essentially combines `git fetch` with `git merge origin/BRANCH-NAME`. This is the perfect command for updating your codebase with completed features. To test this command, go ahead and add a new file from your GitHub Git-Test remote by clicking the `Add File` near the top of your repo followed by the `Create A File`. Name your file file6.txt and commit it directly to master. Now enter in your local Git-Test directory in terminal: 
+```bash 
+git pull origin master 
+```
+And you should see file6.txt.
 
 
 <br/><br/>
@@ -402,7 +449,7 @@ Note that `origin` can be any remote name and `master` can be whatever branch we
 
 <br/><br/>
 
-## 9. Further Reading
+## 9. Sources and Further Reading
 
 
 
