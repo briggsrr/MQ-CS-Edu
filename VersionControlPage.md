@@ -21,8 +21,15 @@ permalink: /versioncontrolsystems/
  * git reset, git restore, and git revert
 
 4. Branching 
+* git branch 
+* git checkout 
+* -b, -m, and -d
+* git stash 
 
 5. Merging
+* git merge 
+* merge conflicts 
+* resolving merge conflicts 
 
 6. Git's Data Model 
     * relating snapshots
@@ -347,11 +354,47 @@ Most people have trouble memorizing 40 hexadecimal character, so git came up wit
  git reset --hard 6f21v1e
  ```
 
-
-
 <br/><br/>
 
 ## 7. Remote Repositories
+So far we have talked about using the `git` command line locally to create a version history of our project, but how can we make this project accessible to other people who want to contribute? This is where remote repositories come into play. Remote repositories allow developers to have a unified source of truth for their source code. It is worth noting there are several Git providers, such as `GitLab` and `BitBucket`, but we will focus on the most popular code hosting platform, `GitHub`. 
+
+![dvc](VersionControlPageAssets/images/dvc.jpg)
+
+If you do not already have a GitHub account, sign up for one [here](https://github.com/). It is reccomended by `GitHub` to have one account for all personal, school, or professional matters.
+
+Now lets create a repository of our git_test folder. Hit the green `new` button near the top left side, and you will be redirected to a page asking for some parameters.  Note that steps 4 and 5 should be skipped if your importing an existing repository, which we are doing in this module.
+1. For repository name put `Git-Test`.
+2. For description put `Experimenting with GitHub`
+3. You can decide whether to be public or private. As the names suggest:
+* A `public repository` is accesible for anyone to see and clone on their local machine
+* A `private repository` is only visible and cloneable to people you give permissions to. 
+For this repo, it might make more sense to be private.
+4. You can decide whether to add a `README.md` file. `README.md` files contain necessary information about the repository such as instructions on how to clone and run source code locally, how to use the codebase, how to workaround bugs, or even contact information about people who contributed to the codebase. 
+5. You can decide whether to add a `.gitignore` file. The purpose of this file is to filter out files and subdirectories in your repository that you do not want Git to keep track of: files contained in a `.gitignore` file will not be marked as modified, staged, or committed by Git. Git offers some templates for you containing commonly ignored files. 
+6. You can decide whether to add a `license`. This tells others what they can and cannot do with your code. 
+
+For this example, remember to not add a `README.md` or a `.gitignore`. Now hit the create button and you should see an empty repository with a few suggestions for `GitHub` with how to get started. Since we want to get our local repository on GitHub, we will be linking our `local` git_test repository with the newly created Git-Test `remote` repo. Once we link them, we can then `push` our code from the git_test to Git-Test. 
+
+To link git_test and Git-Test, enter the following command in your terminal from your git_test directory. 
+```bash 
+git remote add origin URL-TO-YOUR-REMOTE-REPO
+```
+The link to your remote repository is listed near the top of your Git-Test page. 
+
+***What does origin mean?*** <br/>
+`origin` is the name we chose to name our url to our remote repo for simplicity later: we can just use `origin` instead of using the actual URL.  `origin` is the conventional name, but it can be anything. 
+
+Once we have the two repositories linked, let's push our local code and it's revision history to the remote repo using `git push`. This command essentially pushes all updates that were made in the local repository for a specific branch. You can create several commits before pushing to the remote. The syntax in our case is as follows:
+```bash 
+git push origin master 
+```
+Note that `origin` can be any remote name and `master` can be whatever branch we are updating. Verify that on your Git-Test remote repository, there now exists our example source code. 
+
+
+
+
+
 
 <br/><br/>
 
