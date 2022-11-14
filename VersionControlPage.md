@@ -41,6 +41,10 @@ permalink: /versioncontrolsystems/
 7. Remote Repositories
 
 8. Rebasing Branches
+* coming soon! 
+
+9. GitHub Actions
+* coming soon! 
 
 9. Sources and Further Reading 
 
@@ -440,12 +444,29 @@ There exists a commonly-used command called `git pull` that essentially combines
 ```bash 
 git pull origin master 
 ```
-And you should see file6.txt.
+And you should see file6.txt locally.
 
+***How do I revert to an old commit on a remote repo?*** <br/>
+The git reset command's use cases are typically local, since changing the `HEAD` would result in a history conflict with everyone who had a clone the repository. Instead it would be a much better idea to use the aforementioned `git revert` since it will add another commit on top of flawed code that essentially will undo the problem. Example syntax is `git revert HEAD~1`.
+
+
+The last thing that needs mentioning is `pull requests`. A `pull request` is a formal way to contribute to a codebase without disrupting the workflow of other contributors. Here are some other functions of `PR`s:
+1. They are the intermediate step between two branches merging 
+2. They display the list of commits and branch that will merged
+3. They allows for contributors to review code and discuss changes 
+4. They display the files changed and what specific lines were changed
+5. They are user friendly 
+<br/><br/>
+
+Let's quickly set up an example so we can create a PR from branch `develop` to branch `master`. Enter the following commands in your terminal from your Git-Test directory:  
+
+## 8. Rebasing Branches
+Coming soon
 
 <br/><br/>
 
-## 8. Rebasing Branches
+## 10. GitHub Actions
+Coming soon
 
 <br/><br/>
 
