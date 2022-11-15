@@ -39,6 +39,18 @@ permalink: /versioncontrolsystems/
     * references
 
 7. Remote Repositories
+* what github is
+* private vs public repositories
+* README.md
+*.gitignore
+* git remote
+* git push 
+* git clone 
+* --branch, --depth 
+* git fetch 
+* git pull 
+* git revert 
+* pull requests
 
 8. Rebasing Branches
 * coming soon! 
@@ -46,7 +58,7 @@ permalink: /versioncontrolsystems/
 9. GitHub Actions
 * coming soon! 
 
-9. Sources and Further Reading 
+10. Sources and Further Reading 
 
 <br/><br/>
 
@@ -450,27 +462,45 @@ And you should see file6.txt locally.
 The git reset command's use cases are typically local, since changing the `HEAD` would result in a history conflict with everyone who had a clone the repository. Instead it would be a much better idea to use the aforementioned `git revert` since it will add another commit on top of flawed code that essentially will undo the problem. Example syntax is `git revert HEAD~1`.
 
 
-The last thing that needs mentioning is `pull requests`. A `pull request` is a formal way to contribute to a codebase without disrupting the workflow of other contributors. Here are some other functions of `PR`s:
+The last thing that needs mentioning is `pull requests`. A `pull request` is a formal way to contribute to a codebase without disrupting the workflow of other contributors. Here are some other notes about `PR`s:
 1. They are the intermediate step between two branches merging 
 2. They display the list of commits and branch that will merged
-3. They allows for contributors to review code and discuss changes 
+3. They allow for contributors to review code and discuss changes 
 4. They display the files changed and what specific lines were changed
 5. They are user friendly 
 <br/><br/>
 
 Let's quickly set up an example so we can create a PR from branch `develop` to branch `master`. Enter the following commands in your terminal from your Git-Test directory:  
+```bash 
+git checkout -b develop && \
+echo 'I love Git' >> file3.txt && \
+git add . && \
+git commit -m "Adding I love Git to file3.txt" && \
+git push origin develop
+```
+Now head back to your `GitHub` repository and either click the `Compare & pull request` green button, or navigate to the develop branch and click the `Contribute` drop-down menu and then click `Open Pull Request`. After doing so, you are given the option to Title and give a description for your PR. It is good practice, especially when working in a team, to make both of these as descriptive as possible. Focus less on the technical detailed and ask yourself what this PR means for the potential user or other developers who may be involved. Then enter `Create Pull Request`.  Try and become familiar with this interface. There are alot of buttons and things you can do on this page, most of which we won't get into since they are pretty straightforward. Be sure to check out the `files changed` tab to see what was changed in this PR. Verify file3.txt was changed and that `I love Git` was added to it. In a team setting, other members would review your PR before merging, but in case, just merge your own PR by clicking the green button labeled `merge pull request`. Once merged, it is safe to delete the branch since, as we know, the merge commit contains the history of the branch. 
 
 ## 8. Rebasing Branches
 Coming soon
 
 <br/><br/>
 
-## 10. GitHub Actions
+## 9. GitHub Actions
 Coming soon
 
 <br/><br/>
 
-## 9. Sources and Further Reading
+## 10. Sources and Further Reading
+* An incredible open-source MIT lecture and page about Git and Github. Goes very in depth about Git's data model and inspired alot of this writing. Visit this page [here](https://missing.csail.mit.edu/2020/version-control/).
+
+* UCSB CS156 recources created by Professor Phil Contrad. Visit the Git page [here](https://ucsb-cs156.github.io/topics/git/) and the GitHub page [here](https://ucsb-cs156.github.io/topics/GitHub/).
+
+* `Git from the Bottom Up` book by John Wiegly simplfies the Git model and provides another indepth look at the staging area. Visit it [here](https://jwiegley.github.io/git-from-the-bottom-up/).
+
+* An educative.io course that is very beginner friendly look Git. Visit it [here](https://www.educative.io/courses/guide-to-git-and-version-control).
+
+* These are the actual GitHub docs and are the best and most updated source when it comes to Git and GitHUb. Definetly give this site a try if a topic you wanna learn more about was not present. Visit this page [here](https://docs.github.com/en).
+
 
 
 
