@@ -42,7 +42,7 @@ permalink: /versioncontrolsystems/
 * what github is
 * private vs public repositories
 * README.md
-*.gitignore
+* .gitignore
 * git remote
 * git push 
 * git clone 
@@ -139,8 +139,18 @@ The `-m` flag allows you to tag a message associated with your snapshot, which c
 
 ![gitphoto2](VersionControlPageAssets/images/dvc1.jpg)
 
-Now enter `echo "Hello, Git" >> file1.txt`into your terminal and create another snapshot by first adding and then commiting, this time with message `yourinitials - Added Hello, Git to file1.txt`. Entering the command `git log` into your terminal should now show you both your snapshots (or commits) chronologically ordered: complete with the current HEAD, author, timestamp, and even commit messages of your snapshots. `git log` is also extremely useful in collaborative settings, since it also shows the snapshots of all contributors. Hit q to quit the git log process. 
- <br/>
+Let's create another snapchat. In your terminal from your git_test directory enter: 
+```
+echo "Hello, Git" >> file1.txt
+```
+Then create another snapshot by first adding and then commiting, this time with message Added Hello, Git to file1.txt.
+```
+git add . && \
+git commit -m "<yourinitials> - Added Hello, Git to file1.txt"
+```
+
+Entering the command `git log` into your terminal should now show you both your snapshots (or commits) chronologically ordered: complete with the current HEAD, author, timestamp, and even commit messages of your snapshots. `git log` is also extremely useful in collaborative settings, since it also shows the snapshots of all contributors. Hit q to quit the git log process. 
+<br/>
 
 ![gitphoto3](VersionControlPageAssets/images/dvc2.jpg)
 
@@ -273,7 +283,7 @@ Now that we are on the branch that will contain our merge, we can run:
 ```bash 
 git merge develop
 ```
-Verify that both the `master` and `develop` `references` point to the merge commit by using `git log`. Then verify that your git_test directory looks like: 
+A text file might open that asks to type in a merge commit message. Type:   `Adding feature from develop to master` then close the file to complete the merge. Verify that both the `master` and `develop` `references` point to the merge commit by using `git log`. Then verify that your git_test directory looks like: 
 
 ![diag8](VersionControlPageAssets/diagrams/diag8.jpg)
 
@@ -335,6 +345,8 @@ Type `git log` and you will see this commit has a special line that startes with
 <br/><br/>
 
 ## 6. Git's data model
+*Note: this section is noninteractive.*
+
 Now lets dive a little deeper into how that aforementioned .git file is actually relating and storing all these snapshots from potentially multiple branches. A history of a repositoritory is a directed acyclic (no-cycle) graph (or DAG for short) of snapshots, where each snapshot refers to a set of parent snapshots that precede it. When two branches merge is an example of when one snapshot will have 2 parents. Let's quickly look at an example DAG commit history, where the arrows represent the chronology of snapshots. 
 
 ![diag3](VersionControlPageAssets/diagrams/diag3.jpg)
@@ -411,17 +423,17 @@ If we want to copy and clone an entire codebase of a project from a remote repos
 1. Essentially `git remote add origin <url>` is run as a subcommand of `git clone`, automatically linking the local and remote repositories. 
 2. It copies and sets up the primary branch, which is usually set as the `master` in most directories. 
 
-Now that we have pushed our commit history to a remote repository, let's delete our local copy and clone it back to further understand the cloning process. Navigate to git_test on your local machine and enter the following commands: 
+Now that we have pushed our commit history to a remote repository, let's delete our local copy and clone it back to further understand the cloning process. Navigate to git_test on your local machine and enter the following commands. MAKE SURE YOU ARE IN YOUR GIT_TEST REPO. When making this I accidently deleted my entire desktop. 
 ```bash
-rm -rf * && \
-cd ../ && \
-find . -name . -o -prune -exec rm -rf -- {} +
+find . -name . -o -prune -exec rm -rf -- {} + && \
+cd .. && \
+rmdir git_test
 ```
 The find command is complicated but it ensure hidden files and the `.git` metadata is deleted. And then to clone your remote repository run:
 ```bash 
 git clone URL-TO-YOUR-REMOTE-REPO
 ```
-Nice. Try out `git log` and notice now there exists a `origin/master` and `origin/HEAD` reference. Keep in mind the `HEAD` is the latest snapchat of the branch you are on.
+Try out `git log` and notice now there exists a `origin/master` and `origin/HEAD` reference. Keep in mind the `HEAD` is the latest snapchat of the branch you are on.
 
 
 ***What if I want to clone a particular branch?*** <br/>
@@ -430,7 +442,13 @@ You can clone a particular branch with `git clone --branch BRANCH_NAME URL-TO-YO
 ***What if I don't want to clone a project's entire commit history?*** <br/>
 For super big projects, cloning the entire commit history can take a long time. By using a `depth` flag, we can clone a commit history up to a certain point. The full command looks like: `git clone URL-TO-YOUR-REMOTE-REPO --depth DEPTH-NUMBER`
 
-Now let's talk about getting changes from the remote after cloning it. Imagine you just cloned the master branch and are working on a new feature. A few days go by and you want to know how the remote repository has updated since you cloned it. To download the changes without affecting your local codebase, you can use `git fetch`. This essentially is updating the `origin/master` reference, allowing you to see the lastest commit history. Lets see this in action. First go to your Git-Test remote repository on GitHub and click the green `Add a README` button. Select the `commit direct to master branch` option and then commit the file, so the remote repo master branch is 1 commit ahead of our local copy. Now head to your git_test directory in terminal and enter:
+Now let's talk about getting changes from the remote after cloning it. Imagine you just cloned the master branch and are working on a new feature. A few days go by and you want to know how the remote repository has updated since you cloned it. To download the changes without affecting your local codebase, you can use `git fetch`. This essentially is updating the `origin/master` reference, allowing you to see the lastest commit history. Lets see this in action. First go to your Git-Test remote repository on GitHub and: 
+```
+Click the green `Add a README` button. 
+Select the `commit direct to master branch` option and then commit the file. 
+```
+The remote repo master branch is now 1 commit ahead of our local copy.
+Now head to your now named Git-Test directory in terminal and enter:
 ```bash 
 git fetch origin
 ```
@@ -459,7 +477,7 @@ git pull origin master
 And you should see file6.txt locally.
 
 ***How do I revert to an old commit on a remote repo?*** <br/>
-The git reset command's use cases are typically local, since changing the `HEAD` would result in a history conflict with everyone who had a clone the repository. Instead it would be a much better idea to use the aforementioned `git revert` since it will add another commit on top of flawed code that essentially will undo the problem. Example syntax is `git revert HEAD~1`.
+The git reset command's use cases are typically local, since changing the `HEAD` would result in a history conflict with everyone who had a clone the repository. Instead it would be a much better idea to use the aforementioned `git revert` since it will add another commit on top of flawed one that essentially will undo the problem. Example syntax is `git revert HEAD~1`.
 
 
 The last thing that needs mentioning is `pull requests`. A `pull request` is a formal way to contribute to a codebase without disrupting the workflow of other contributors. Here are some other notes about `PR`s:
@@ -493,7 +511,7 @@ Coming soon
 ## 10. Sources and Further Reading
 * An incredible open-source MIT lecture and page about Git and Github. Goes very in depth about Git's data model and inspired alot of this writing. Visit this page [here](https://missing.csail.mit.edu/2020/version-control/).
 
-* UCSB CS156 recources created by Professor Phil Contrad. Visit the Git page [here](https://ucsb-cs156.github.io/topics/git/) and the GitHub page [here](https://ucsb-cs156.github.io/topics/GitHub/).
+* UCSB CS156 recources created by Professor Phil Conrad. Visit the Git page [here](https://ucsb-cs156.github.io/topics/git/) and the GitHub page [here](https://ucsb-cs156.github.io/topics/GitHub/).
 
 * `Git from the Bottom Up` book by John Wiegly simplfies the Git model and provides another indepth look at the staging area. Visit it [here](https://jwiegley.github.io/git-from-the-bottom-up/).
 
