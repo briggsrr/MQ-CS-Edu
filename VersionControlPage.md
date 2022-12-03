@@ -53,7 +53,8 @@ permalink: /versioncontrolsystems/
 * pull requests
 
 8. Rebasing Branches
-* coming soon! 
+* git rebase
+* rebase vs merge
 
 9. Sources and Further Reading 
 
@@ -543,6 +544,8 @@ Let's quickly look at some of the main differences between `git rebase` and `git
 * An educative.io course that is very beginner friendly look Git. Visit it [here](https://www.educative.io/courses/guide-to-git-and-version-control).
 
 * These are the actual GitHub docs and are the best and most updated source when it comes to Git and GitHUb. Definetly give this site a try if a topic you wanna learn more about was not present. Visit this page [here](https://docs.github.com/en).
+
+* Diagram at the end and recources about git rebase vs merge [here](https://www.simplilearn.com/git-rebase-vs-merge-article#:~:text=All%20the%20commits%20on%20a,the%20target%20branch%20is%20private.).
 
 
 
