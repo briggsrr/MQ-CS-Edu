@@ -55,10 +55,7 @@ permalink: /versioncontrolsystems/
 8. Rebasing Branches
 * coming soon! 
 
-9. GitHub Actions
-* coming soon! 
-
-10. Sources and Further Reading 
+9. Sources and Further Reading 
 
 <br/><br/>
 
@@ -503,12 +500,8 @@ Coming soon
 
 <br/><br/>
 
-## 9. GitHub Actions
-Coming soon
 
-<br/><br/>
-
-## 10. Sources and Further Reading
+## 9. Sources and Further Reading
 * An incredible open-source MIT lecture and page about Git and Github. Goes very in depth about Git's data model and inspired alot of this writing. Visit this page [here](https://missing.csail.mit.edu/2020/version-control/).
 
 * UCSB CS156 recources created by Professor Phil Conrad. Visit the Git page [here](https://ucsb-cs156.github.io/topics/git/) and the GitHub page [here](https://ucsb-cs156.github.io/topics/GitHub/).
