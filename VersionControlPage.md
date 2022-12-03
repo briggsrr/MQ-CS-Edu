@@ -496,7 +496,39 @@ git push origin develop
 Now head back to your `GitHub` repository and either click the `Compare & pull request` green button, or navigate to the develop branch and click the `Contribute` drop-down menu and then click `Open Pull Request`. After doing so, you are given the option to Title and give a description for your PR. It is good practice, especially when working in a team, to make both of these as descriptive as possible. Focus less on the technical detailed and ask yourself what this PR means for the potential user or other developers who may be involved. Then enter `Create Pull Request`.  Try and become familiar with this interface. There are alot of buttons and things you can do on this page, most of which we won't get into since they are pretty straightforward. Be sure to check out the `files changed` tab to see what was changed in this PR. Verify file3.txt was changed and that `I love Git` was added to it. In a team setting, other members would review your PR before merging, but in case, just merge your own PR by clicking the green button labeled `merge pull request`. Once merged, it is safe to delete the branch since, as we know, the merge commit contains the history of the branch. 
 
 ## 8. Rebasing Branches
-Coming soon
+Imagine you create out a new branch called `develop` from `master` and both branches are pushing new commits and you want to link the latest version of the master branch with your branch (reference below image). To do this, git provides a `git rebase` command.
+
+![dvc8](VersionControlPageAssets/images/dvc8.jpg)
+
+Let's get into an example. To setup this situation, copy the below code from your previous Git-Test directory from on branch develop:
+```bash
+touch file6.txt && \
+git add . && \
+git commit -m "Adding file6.txt on branch develop" && \
+git checkout master && \
+touch file7.txt && \
+git add . && \
+git commit -m "Adding file7.txt on branch master" && \
+git checkout develop
+```
+Essentially this above code just creates a commit on the master and develop branch. You should be on the `develop` branch. Now try running: 
+```
+git rebase master
+```
+Run `git log` and look at where the references point now: the develop commit. Run `ls` on develop and notice file7.txt from the master snapshot. The below image should also give insight into what the Git-Test commit history should look like.
+
+![dvc9](VersionControlPageAssets/images/dvc9.jpg)
+
+
+It may have occured to you that when rebasing (like merging) there is the possibility of conflicts. This occurs when the rebase branch has commits that change the same files as your current branch. The process for resolving this is almost identical to solving a merge conflict. Since we have seen how that process works, for now it will be skipped but I challenge the reader to try and create this scenario in Git-Test and resolve a conflict. 
+
+![dvc10](VersionControlPageAssets/images/dvc10.jpg)
+
+Let's quickly look at some of the main differences between `git rebase` and `git merge`:
+
+![dvc11](VersionControlPageAssets/images/dvc11.jpg)
+
+
 
 <br/><br/>
 
