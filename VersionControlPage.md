@@ -541,7 +541,7 @@ Let's quickly look at some of the main differences between `git rebase` and `git
 
 * `Git from the Bottom Up` book by John Wiegly simplfies the Git model and provides another indepth look at the staging area. Visit it [here](https://jwiegley.github.io/git-from-the-bottom-up/).
 
-* An educative.io course that is very beginner friendly look Git. Visit it [here](https://www.educative.io/courses/guide-to-git-and-version-control).
+* An educative.io course that is a very beginner friendly look Git. Visit it [here](https://www.educative.io/courses/guide-to-git-and-version-control).
 
 * These are the actual GitHub docs and are the best and most updated source when it comes to Git and GitHUb. Definetly give this site a try if a topic you wanna learn more about was not present. Visit this page [here](https://docs.github.com/en).
 
