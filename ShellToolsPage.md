@@ -34,14 +34,29 @@ In this module, we will dive into the world of shell, exposing the many underuti
 ## 2. Shell Introduction 
 A `shell program` is (typically) an executable binary whose commands are turned into system calls to the operating system application programming interface, or `OS API` for short. In this module, we will use the `zsh` which is built on `bash`. Feel free to use either: note that `zsh` is more interactive and customizable than `bash`. Learn more about setting up `zsh` [here](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH). 
 
-In addtion to `bash` and `zsh` there are other used shells like `sh`, `ash`, `dash`, `ksh`, `tcsh`, and `tclsh`. These shells have different syntax and vary is subtle ways, but since shells are also programs, you can run one inside of another. Lets test this. Open up a terminal and enter the follow, note that `echo $0` displays what shell you are using, and `exit` closes the shell:
+In addtion to `bash` and `zsh` there are other used shells like `sh`, `ash`, `dash`, `ksh`, `tcsh`, and `tclsh`. These shells have different syntax and vary is subtle ways, but since shells are also programs, you can run one inside of another. Lets test this. Open up your terminal and enter the follow, note that `echo $0` displays what shell you are using, and `exit` closes the shell:
 ```
 tcsh
 echo $0
 exit
 echo $0
 ```
-You should see the first `echo $0` outputed `tcsh` and the second outputted your original shell. The `tcsh` process is a child process, meaning it is a process created by another process (the parent process). Try running `sh` and then `echo $0` to solidify your understanding of a child process. 
+You should see the first `echo $0` outputed `tcsh` and the second outputted your original shell. The `tcsh` process is a child process, meaning it is a process created by another process (the parent process). Try running `sh` and then `echo $0` to solidify your understanding of the basic child-parent idea. We will talk alot more about process commands later.
+
+Let's look at some commands that will help you identify your system. Try running:
+```
+id
+```
+This will show you a bunch of data about related to user and group names. Now try: 
+```
+w
+```
+This will show you who is logged in. You can also get specific with `w hi USERNAME-ON-YOUR-MACHINE` and the shell will show you where a user is logged in from.
+
+There are also many ways to get help. You can use either `man` or `info` to obtain details and usage about certain commands. Try running:
+```
+man echo
+```
 
 ## 3. Core Usage 
 
@@ -53,3 +68,6 @@ You should see the first `echo $0` outputed `tcsh` and the second outputted your
 
 ## 7. Sources and Further Reading
 * An incredible open-source MIT lecture and page about Git and Github. Goes very in depth about Git's data model and inspired alot of this writing. Visit this page [here](https://missing.csail.mit.edu/2020/course-shell/).
+
+* A complete in depth and detailed look at Linux Terminal tools by Ketan M. I highly recommend for advanced readers. Visit this page [here](https://ketancmaheshwari.github.io/pdfs/LPT_LISA.pdf)
+
