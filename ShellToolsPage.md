@@ -59,6 +59,8 @@ man echo
 ```
 
 ## 3. Core Usage 
+Before we dive deep into some core commands used in zsh, we first have to understand the special characters recongized by the shell and the differences between single and double quotes. From your working directory, enter the following commands: 
+
 
 ## 4. Scripting 
 
